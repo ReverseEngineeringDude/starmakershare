@@ -9,6 +9,15 @@ android {
     namespace = "com.example.starmusicshare"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+    split {
+        abi {
+            enable true
+            reset()
+            include "armeabi-v7a", "arm64-v8a"
+            universalApk false
+        }
+    }
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -35,6 +44,14 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            ndk {
+                debugSymbolLevel 'none'
+            }
+            minifyEnabled true
+            shrinkResources true
+            useProguard true
+
+
         }
     }
 }
