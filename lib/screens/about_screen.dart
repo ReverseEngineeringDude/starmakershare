@@ -66,10 +66,7 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            Text(
-              'Connect with me',
-              style: theme.textTheme.titleLarge,
-            ),
+            Text('Connect with me', style: theme.textTheme.titleLarge),
             const SizedBox(height: 16),
             Wrap(
               alignment: WrapAlignment.center,
@@ -78,6 +75,10 @@ class AboutScreen extends StatelessWidget {
                 _buildSocialButton(
                   icon: FontAwesomeIcons.github,
                   url: 'https://github.com/ReverseEngineeringDude',
+                ),
+                _buildSocialButton(
+                  icon: FontAwesomeIcons.instagram,
+                  url: 'https://instagram.com/Red_Byte.Sec',
                 ),
                 _buildSocialButton(
                   icon: FontAwesomeIcons.twitter,
