@@ -16,6 +16,7 @@ class ShareReceiverScreen extends StatefulWidget {
 
 class _ShareReceiverScreenState extends State<ShareReceiverScreen> {
   StreamSubscription? _shareSubscription;
+  final _urlController = TextEditingController();
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _ShareReceiverScreenState extends State<ShareReceiverScreen> {
   @override
   void dispose() {
     _shareSubscription?.cancel();
+    _urlController.dispose();
     super.dispose();
   }
 
@@ -154,31 +156,88 @@ class _ShareReceiverScreenState extends State<ShareReceiverScreen> {
         );
       case AppState.idle:
       default:
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Icon(Icons.share, size: 100, color: Colors.deepPurpleAccent),
-            const SizedBox(height: 20),
-            Text(
-              'Share a StarMaker Song',
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              '1. Open the StarMaker app.\n\n'
-              '2. Find a recorded song you like.\n\n'
-              '3. Tap the "Share" button.\n\n'
-              '4. Choose "StarMusicShare" from the list.',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white70,
-                height: 1.5,
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Manual Download',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              TextField(
+                controller: _urlController,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: 'Paste StarMaker link here',
+                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                  border: const OutlineInputBorder(),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton.icon(
+                onPressed: () {
+                  if (_urlController.text.trim().isNotEmpty) {
+                    // Hide keyboard
+                    FocusScope.of(context).unfocus();
+                    provider.processSharedUrl(_urlController.text.trim());
+                  }
+                },
+                icon: const Icon(Icons.download),
+                label: const Text('Download Song'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurpleAccent,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  textStyle: const TextStyle(fontSize: 16),
+                ),
+              ),
+              const SizedBox(height: 40),
+              Row(
+                children: [
+                  const Expanded(child: Divider(thickness: 1)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Text(
+                      'OR',
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.7),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Expanded(child: Divider(thickness: 1)),
+                ],
+              ),
+              const SizedBox(height: 40),
+              const Icon(Icons.share, size: 80, color: Colors.deepPurpleAccent),
+              const SizedBox(height: 16),
+              Text(
+                'Share from StarMaker App',
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                '1. Open the StarMaker app.\n'
+                '2. Find a recorded song.\n'
+                '3. Tap the "Share" button.\n'
+                '4. Choose "StarMusicShare" from the list.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white70,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         );
     }
   }
