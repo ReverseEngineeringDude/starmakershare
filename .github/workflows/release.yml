@@ -29,15 +29,17 @@ jobs:
       - name: Get packages
         run: flutter pub get
 
-      - name: Build APK
+      - name: Build APK (Split per ABI)
         run: flutter build apk --release --split-per-abi
 
-      - name: Create Release + Upload APK
+      - name: Create Release + Upload APKs
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.${{ github.run_number }}      # IMPORTANT
+          tag_name: v1.0.${{ github.run_number }}
           name: Release v1.0.${{ github.run_number }}
-          files: build/app/outputs/flutter-apk/app-release.apk
+          files: |
+            build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+            build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
           overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
