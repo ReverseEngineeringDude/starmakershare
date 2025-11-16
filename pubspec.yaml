@@ -28,6 +28,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  package_rename: ^1.5.3
+  
 
 flutter:
   uses-material-design: true
@@ -41,3 +43,12 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/playstore-icon.png"
   remove_alpha_ios: true
+
+package_rename_config:
+  android:
+    app_name: "Star Maker Share"
+    package_name: "com.red.starmaker"
+  ios:
+    app_name: "Star Maker Share"
+    bundle_name: "com.red.star"
+
