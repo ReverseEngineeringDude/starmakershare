@@ -1,0 +1,43 @@
+name: starmusicshare
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  share_handler: ^0.0.25
+  share_plus: ^12.0.1
+  dio: ^5.9.0
+  http: ^1.6.0
+  path_provider: ^2.1.5
+  ffmpeg_kit_flutter_new_min_gpl: ^2.1.1
+  provider: ^6.1.5+1
+  flutter_spinkit: ^5.2.2
+  just_audio: ^0.10.5
+  uri: ^1.0.0
+  font_awesome_flutter: ^10.12.0
+  url_launcher: ^6.3.2
+  flutter_launcher_icons: ^0.14.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/bg.jpg
+    - assets/Logo.png
+    - assets/playstore-icon.png
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/playstore-icon.png"
+  remove_alpha_ios: true
